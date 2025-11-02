@@ -56,6 +56,9 @@ Verify the following files exist to be used as the knowledge base:
 data/dataset.csv
 data/symptom_description.csv
 data/symptom_precaution.csv
+
+---
+
 5. Build metadata & model (train baseline)
 Run the training script to build the TF-IDF vectorizer and train the baseline Logistic Regression model. This generates necessary files in the models/ directory.
 
