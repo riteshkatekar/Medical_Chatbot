@@ -53,9 +53,10 @@ pip install -r requirements.txt
 4. Ensure your data CSVs are in the data/ folder
 Verify the following files exist to be used as the knowledge base:
 
-data/dataset.csv
-data/symptom_description.csv
-data/symptom_precaution.csv
+├─ data/
+│  ├─ dataset.csv
+│  ├─ symptom_description.csv
+│  └─ symptom_precaution.csv
 
 ---
 
