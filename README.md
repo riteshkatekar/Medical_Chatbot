@@ -7,7 +7,7 @@ A **stateless, safety-first healthcare chatbot** that predicts likely conditions
 ## ⚙️ Overview
 
 - **Backend:** Python (`TF-IDF + LogisticRegression` baseline; rule/fuzzy-based `InferenceEngine`)
-- **Frontend:** Streamlit (web UI) with embedded **ChatGPT-style mic** using the browser **Web Speech API**
+- **Frontend:** Streamlit (web UI) 
 - **Data:** CSV knowledge bases (`data/dataset.csv`, `data/symptom_description.csv`, `data/symptom_precaution.csv`)
 - **CLI:** `src/chatbot.py` for interactive/single query usage
 - **Training:** `src/baseline.py` creates `models/system_metadata.pkl`, TF-IDF and sklearn model
