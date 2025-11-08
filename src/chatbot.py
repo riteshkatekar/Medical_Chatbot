@@ -1,8 +1,5 @@
 
-#!/usr/bin/env python3
-=======
-# src/chatbot.py 
->>>>>>> 61ea1752c12febf1ea3c97dca0ca50d61d299833
+
 """
 src/chatbot.py (stateless)
 
