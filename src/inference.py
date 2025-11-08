@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # """
 # src/inference.py 
 
@@ -289,6 +290,10 @@
 
 # """
 # src/inference.py
+=======
+"""
+src/inference.py
+>>>>>>> 61ea1752c12febf1ea3c97dca0ca50d61d299833
 
 # Updated InferenceEngine implementing refined response logic:
 #  - Adaptive prediction: 3+ symptoms -> single disease, 1-2 symptoms -> up to 3 diseases
