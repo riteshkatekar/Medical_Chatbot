@@ -72,6 +72,13 @@ LLM_MAX_TOKENS=512
 
 ```
 
+
+### 5. Generate the dataset for the project using following command
+```bash
+python generate_dataset.py
+
+```
+
 ### 5. Build metadata & model (train baseline)
 Run the training script to build the TF-IDF vectorizer and train the baseline Logistic Regression model. This generates necessary files in the models/ directory.
 
