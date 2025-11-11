@@ -21,7 +21,7 @@ def _dedupe_preserve_order(items: List[str]) -> List[str]:
         out.append(it.strip())
     return out
 
-def _extract_precautions_from_text(reply: str) -> (str, List[str]):
+def _extract_precautions_from_text(reply: str) -> (str, List[str]): # type: ignore
     """
     If reply contains a 'precaution' or 'precautions' section, extract it.
     Returns (main_text_without_prec_section, list_of_precautions_extracted)

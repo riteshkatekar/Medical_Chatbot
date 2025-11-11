@@ -1,9 +1,5 @@
 
-<<<<<<< HEAD
-
-=======
 # src/chatbot.py 
->>>>>>> 73729ce (Added all files)
 """
 src/chatbot.py (stateless)
 

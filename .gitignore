@@ -16,9 +16,9 @@ venv/
 # =========================
 # Model artifacts
 # =========================
-models/*.h5
-models/*.keras
-models/*.pkl
+# models/*.h5
+# models/*.keras
+# models/*.pkl
 
 # =========================
 # Streamlit / Flask cache
