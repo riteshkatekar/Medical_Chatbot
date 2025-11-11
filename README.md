@@ -73,7 +73,7 @@ LLM_MAX_TOKENS=512
 ```
 
 
-### 5. Generate the dataset for the project using following command
+### 5. Generate the dataset for the project using following command (run this in root directory)
 ```bash
 python generate_dataset.py
 
