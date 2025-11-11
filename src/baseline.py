@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 
 
 #!/usr/bin/env python3
+=======
+>>>>>>> 73729ce (Added all files)
 """
 src/baseline.py
 

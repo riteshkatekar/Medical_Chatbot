@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 
 
 ####################################################################
 
+=======
+>>>>>>> 73729ce (Added all files)
 # src/inference.py
 """
 Inference engine for the medical chatbot.

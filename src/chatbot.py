@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 
+=======
+# src/chatbot.py 
+>>>>>>> 73729ce (Added all files)
 """
 src/chatbot.py (stateless)
 
@@ -415,6 +419,8 @@ def get_chatbot_response(query: str, models_dir: str = "models", threshold: floa
 def chatbot_reply(query: str, models_dir: str = "models", threshold: float = 0.5) -> str:
     resp = get_chatbot_response(query, models_dir=models_dir, threshold=threshold)
     return resp.get("reply", "")
+
+
 
 
 # ----------------- CLI Entrypoints -----------------

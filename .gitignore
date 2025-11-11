@@ -1,0 +1,42 @@
+# =========================
+# Python cache & build files
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# =========================
+# Virtual environment
+# =========================
+venv/
+.env
+
+# =========================
+# Model artifacts
+# =========================
+models/*.h5
+models/*.keras
+models/*.pkl
+
+# =========================
+# Streamlit / Flask cache
+# =========================
+.streamlit/
+instance/
+.cache/
+
+# =========================
+# Secrets & credentials
+# =========================
+*.json
+secrets.*
+token.*
+credentials.*
+client_secret.*
+.env.*
+.env.local
+
+
+

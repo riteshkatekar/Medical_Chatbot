@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Medical Chatbot</title>
+
+  <!-- Bootstrap + FontAwesome -->
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+
+  <style>
+  /* ====== your reference style.css (embedded) ====== */
+  body,html{
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(to right, rgb(38, 51, 61), rgb(50, 55, 65), rgb(33, 33, 78));
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+  .chat{
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .card{
+    height: 500px;
+    border-radius: 15px !important;
+    background-color: rgba(0,0,0,0.45) !important;
+    color: #e9eef6;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+  .contacts_body{
+    padding:  0.75rem 0 !important;
+    overflow-y: auto;
+    white-space: nowrap;
+  }
+  .msg_card_body{
+    overflow-y: auto;
+    padding: 18px;
+    display: block;
+  }
+  .card-header{
+    border-radius: 15px 15px 0 0 !important;
+    border-bottom: 0 !important;
+    background: rgba(0,0,0,0.12);
+  }
+  .card-footer{
+    border-radius: 0 0 15px 15px !important;
+    border-top: 0 !important;
+    background: rgba(0,0,0,0.08);
+    padding: 18px;
+  }
+  .container{
+    align-content: center;
+  }
+  .search{
+    border-radius: 15px 0 0 15px !important;
+    background-color: rgba(0,0,0,0.3) !important;
+    border:0 !important;
+    color:white !important;
+  }
+  .search:focus{
+     box-shadow:none !important;
+     outline:0px !important;
+  }
+  .type_msg{
+    background-color: rgba(0,0,0,0.32) !important;
+    border:0 !important;
+    color:white !important;
+    height: 60px !important;
+    overflow-y: auto;
+    border-radius: 15px;
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+  .type_msg:focus{
+    box-shadow:none !important;
+    outline:0px !important;
+  }
+  .type_msg::placeholder {
+    color: rgba(255,255,255,0.55);
+  }
+  .attach_btn{
+    border-radius: 15px 0 0 15px !important;
+    background-color: rgba(0,0,0,0.3) !important;
+    border:0 !important;
+    color: white !important;
+    cursor: pointer;
+  }
+  .send_btn{
+    border-radius: 0 15px 15px 0 !important;
+    background-color: rgba(0,0,0,0.3) !important;
+    border:0 !important;
+    color: white !important;
+    cursor: pointer;
+  }
+  .search_btn{
+    border-radius: 0 15px 15px 0 !important;
+    background-color: rgba(0,0,0,0.3) !important;
+    border:0 !important;
+    color: white !important;
+    cursor: pointer;
+  }
+  .contacts{
+    list-style: none;
+    padding: 0;
+  }
+  .contacts li{
+    width: 100% !important;
+    padding: 5px 10px;
+    margin-bottom: 15px !important;
+  }
+  .active{
+    background-color: rgba(0,0,0,0.3);
+  }
+  .user_img{
+    height: 70px;
+    width: 70px;
+    border:1.5px solid #f5f6fa;
+  }
+  .user_img_msg{
+    height: 40px;
+    width: 40px;
+    border:1.5px solid #f5f6fa;
+  }
+  .img_cont{
+    position: relative;
+    height: 70px;
+    width: 70px;
+  }
+  .img_cont_msg{
+    height: 40px;
+    width: 40px;
+  }
+
+  /* online icon (header avatar) - small green dot with white border */
+  .online_icon{
+    position: absolute;
+    height: 15px;
+    width:15px;
+    background-color: #4cd137;
+    border-radius: 50%;
+    bottom: 0.2em;
+    right: 0.4em;
+    border:1.5px solid rgba(0,0,0,0.85);
+    box-shadow: 0 2px 8px rgba(76,209,55,0.12);
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76,209,55,0.16); }
+    70% { transform: scale(1.06); box-shadow: 0 0 0 8px rgba(76,209,55,0.02); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76,209,55,0); }
+  }
+
+  .offline{
+    background-color: #c23616 !important;
+  }
+  .user_info{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 15px;
+  }
+  .user_info span{
+    font-size: 20px;
+    color: white;
+  }
+  .user_info p{
+    font-size: 10px;
+    color: rgba(255,255,255,0.6);
+  }
+  .video_cam{
+    margin-left: 50px;
+    margin-top: 5px;
+  }
+  .video_cam span{
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin-right: 20px;
+  }
+
+  /* message bubble styles (compact, no oversized padding) */
+  .msg_cotainer{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    border-radius: 18px;           /* slightly less rounded than original for cleaner look */
+    background-color: rgb(82, 172, 255);
+    padding: 10px 14px;
+    position: relative;
+    display: inline-block;
+    max-width: 72%;
+    word-wrap: break-word;
+    box-shadow: 0 6px 18px rgba(6,33,53,0.08);
+    font-size:15px;
+    line-height:1.45;
+    color: #062135;
+  }
+  .msg_cotainer_send{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+    border-radius: 18px;
+    background-color: #58cc71;
+    padding: 10px 14px;
+    position: relative;
+    display: inline-block;
+    max-width: 40%;
+    word-wrap: break-word;
+    box-shadow: 0 6px 14px rgba(4,43,22,0.08);
+    font-size:15px;
+    line-height:1.35;
+    color: #042b16;
+  }
+
+  .msg_time{
+    position: absolute;
+    left: 6px;
+    bottom: -16px;
+    color: rgba(255,255,255,0.55);
+    font-size: 10px;
+  }
+  .msg_time_send{
+    position: absolute;
+    right:6px;
+    bottom: -16px;
+    color: rgba(255,255,255,0.55);
+    font-size: 10px;
+  }
+
+  .msg_head{
+    position: relative;
+  }
+  #action_menu_btn{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  .action_menu{
+    z-index: 1;
+    position: absolute;
+    padding: 15px 0;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border-radius: 15px;
+    top: 30px;
+    right: 15px;
+    display: none;
+  }
+  .action_menu ul{ list-style: none; padding: 0; margin: 0; }
+  .action_menu ul li{ width: 100%; padding: 10px 15px; margin-bottom: 5px; }
+  .action_menu ul li i{ padding-right: 10px; }
+  .action_menu ul li:hover{ cursor: pointer; background-color: rgba(0,0,0,0.2); }
+
+  @media(max-width: 576px){
+    .contacts_card{ margin-bottom: 15px !important; }
+    .card { height: auto; }
+  }
+
+  </style>
+</head>
+<body>
+  <div class="container-fluid h-100">
+    <div class="row justify-content-center h-100">
+      <div class="col-md-8 col-xl-6 chat">
+        <div class="card">
+          <!-- header -->
+          <div class="card-header msg_head">
+            <div class="d-flex bd-highlight">
+              <div class="img_cont">
+                <img src="https://cdn-icons-png.flaticon.com/512/387/387569.png" class="rounded-circle user_img" alt="bot" />
+                <span class="online_icon" aria-hidden="true"></span>
+              </div>
+              <div class="user_info">
+                <span>Medical Chatbot</span>
+                <p>Ask me anything!</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- messages -->
+          <div id="messageFormeight" class="card-body msg_card_body" role="log" aria-live="polite">
+            <!-- messages inserted here by JS -->
+          </div>
+
+          <!-- footer / input -->
+          <div class="card-footer">
+            <form id="messageArea" class="input-group" autocomplete="off">
+              <input type="text" id="text" name="msg" placeholder="Type your message..." autocomplete="off"
+                     class="form-control type_msg" maxlength="600" required />
+              <div class="input-group-append">
+                <button type="submit" id="send" class="input-group-text send_btn" aria-label="Send">
+                  <i class="fas fa-location-arrow"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery + bootstrap js -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+  <script>
+  // JS is same as your reference but escapes text to avoid HTML injection,
+  // posts to /get and appends messages inside #messageFormeight
+  $(document).ready(function () {
+    $("#messageArea").on("submit", function (event) {
+      event.preventDefault();
+      const date = new Date();
+      const hour = date.getHours().toString().padStart(2, '0');
+      const minute = date.getMinutes().toString().padStart(2, '0');
+      const str_time = hour + ":" + minute;
+      var rawText = $("#text").val().trim();
+
+      if (!rawText) return;
+
+      // user message HTML (matches CSS .msg_cotainer_send structure)
+      var userHtml = `
+        <div class="d-flex justify-content-end mb-3 align-items-end">
+          <div class="msg_cotainer_send">${escapeHtml(rawText)}
+            <span class="msg_time_send">${str_time}</span>
+          </div>
+          <div class="img_cont_msg" style="margin-left:10px;">
+            <img src="https://i.ibb.co/d5b84Xw/Untitled-design.png" class="rounded-circle user_img_msg" alt="you" />
+          </div>
+        </div>
+      `;
+      $("#text").val("");
+      $("#messageFormeight").append(userHtml);
+      scrollToBottom();
+
+      // AJAX POST to /get
+      $.ajax({
+        type: "POST",
+        url: "/get",
+        data: { msg: rawText },
+        dataType: "json",
+        success: function (data) {
+          if (data.error) {
+            var botHtml = `
+              <div class="d-flex justify-content-start mb-3 align-items-start">
+                <div class="img_cont_msg" style="margin-right:10px;">
+                  <img src="https://cdn-icons-png.flaticon.com/512/387/387569.png" class="rounded-circle user_img_msg" alt="bot" />
+                </div>
+                <div class="msg_cotainer">⚠️ ${escapeHtml(data.error)}
+                  <span class="msg_time">${str_time}</span>
+                </div>
+              </div>
+            `;
+            $("#messageFormeight").append(botHtml);
+          } else {
+            let botReply = data.answer || "Sorry, I couldn't understand that.";
+            var botHtml = `
+              <div class="d-flex justify-content-start mb-3 align-items-start">
+                <div class="img_cont_msg" style="margin-right:10px;">
+                  <img src="https://cdn-icons-png.flaticon.com/512/387/387569.png" class="rounded-circle user_img_msg" alt="bot" />
+                </div>
+                <div class="msg_cotainer">${escapeHtml(botReply)}
+                  <span class="msg_time">${str_time}</span>
+                </div>
+              </div>
+            `;
+            $("#messageFormeight").append(botHtml);
+
+            if (data.emergency) {
+              var em = `<div class="emergency-banner">⚠️ EMERGENCY: This sounds like a medical emergency. Call local emergency services immediately.</div>`;
+              $("#messageFormeight").append(em);
+            }
+          }
+          scrollToBottom();
+        },
+        error: function (xhr, status, error) {
+          var botHtml = `
+            <div class="d-flex justify-content-start mb-3 align-items-start">
+              <div class="img_cont_msg" style="margin-right:10px;">
+                <img src="https://cdn-icons-png.flaticon.com/512/387/387569.png" class="rounded-circle user_img_msg" alt="bot" />
+              </div>
+              <div class="msg_cotainer">⚠️ Error: Unable to reach server.
+                <span class="msg_time">${str_time}</span>
+              </div>
+            </div>
+          `;
+          $("#messageFormeight").append(botHtml);
+          scrollToBottom();
+        }
+      });
+    });
+
+    function scrollToBottom() {
+      var chatBody = $("#messageFormeight");
+      chatBody.scrollTop(chatBody[0].scrollHeight);
+    }
+
+    function escapeHtml(unsafe) {
+      return String(unsafe)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // autofocus input
+    setTimeout(function(){ $("#text").focus(); }, 200);
+  });
+  </script>
+</body>
+</html>

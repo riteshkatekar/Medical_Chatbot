@@ -1,18 +1,33 @@
 # 🏥 Healthcare Chatbot
 
-A **stateless, safety-first healthcare chatbot** that predicts likely conditions from user-provided symptoms, explains reasoning, and lists safe precautions.
+A **stateless, safety-first healthcare chatbot** that predicts likely conditions from user-provided symptoms, provides concise medical explanations, and offers safe, evidence-based advice — powered by **AI + Groq LLM** for enhanced clarity and precision.
 
 ---
 
 ## ⚙️ Overview
 
+<<<<<<< HEAD
 - **Backend:** Python (`TF-IDF + LogisticRegression` baseline; rule/fuzzy-based `InferenceEngine`)
 - **Frontend:** Streamlit (web UI) 
 - **Data:** CSV knowledge bases (`data/dataset.csv`, `data/symptom_description.csv`, `data/symptom_precaution.csv`)
 - **CLI:** `src/chatbot.py` for interactive/single query usage
 - **Training:** `src/baseline.py` creates `models/system_metadata.pkl`, TF-IDF and sklearn model
+=======
+| Component | Technology | Description |
+|------------|-------------|-------------|
+| **Backend** | Python (`TF-IDF + LogisticRegression`, Keras optional) | Core inference + condition classification |
+| **LLM Enrichment** | [Groq API](https://groq.com/) | Enhances explanations with medically aligned, natural replies |
+| **Frontend** | **Flask** (HTML + AJAX) | Lightweight and fast chatbot web interface |
+| **Data** | CSV Knowledge Bases | `data/dataset.csv`, `data/symptom_description.csv`, `data/symptom_precaution.csv` |
+| **Model Artifacts** | Pickle + TensorFlow | Stored under `/models` (`.pkl`, `.h5`, `.keras`) |
+| **Core Modules** | `src/chatbot.py`, `src/inference.py`, `src/llm.py`, `src/utils.py` | Classification, rule-based reasoning, LLM enrichment |
+| **Training** | `src/baseline.py` | Builds `system_metadata.pkl`, TF-IDF, and trained model |
+>>>>>>> 73729ce (Added all files)
 
 ---
+
+
+
 
 
 
@@ -46,16 +61,33 @@ python -m venv .venv
 Install all required libraries listed in requirements.txt.
 
 ```bash
-pip install --upgrade pip
-pip install -r requirements.txt
+pip install --upgrade pip && pip install -r requirements.txt
+
 ```
 
 
+<<<<<<< HEAD
 ### 4. Generate the dataset for the project using following command
 
 ```bash
 python generate_dataset.py
 ```
+=======
+### 4. Set up your environment variables
+
+Create a .env file in the root directory and add the following:
+
+
+```bash
+GROQ_API_KEY=your_groq_api_key_here
+GROQ_MODEL_ID=openai/gpt-oss-20b
+LLM_TEMPERATURE=0.2
+LLM_MAX_TOKENS=512
+
+
+```
+
+>>>>>>> 73729ce (Added all files)
 ### 5. Build metadata & model (train baseline)
 Run the training script to build the TF-IDF vectorizer and train the baseline Logistic Regression model. This generates necessary files in the models/ directory.
 
@@ -69,10 +101,17 @@ Test the core prediction engine via the command line.
 python src/chatbot.py --models_dir models --interactive --threshold 0.05
 ```
 
+<<<<<<< HEAD
 ### 7. Run the Streamlit UI (open browser when started)
 Launch the web interface. Streamlit will automatically open a tab in your default browser.
 
+=======
+### 7. Run the project
+Launch the web interface. 
+>>>>>>> 73729ce (Added all files)
 ```bash
-
-streamlit run app.py
+python app.py
 ```
+Then open your browser and visit:
+
+👉 http://127.0.0.1:8080/
