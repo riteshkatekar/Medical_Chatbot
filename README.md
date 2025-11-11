@@ -79,20 +79,20 @@ python generate_dataset.py
 
 ```
 
-### 5. Build metadata & model (train baseline)
+### 6. Build metadata & model (train baseline)
 Run the training script to build the TF-IDF vectorizer and train the baseline Logistic Regression model. This generates necessary files in the models/ directory.
 
 ```bash
 python src/baseline.py --data_path data/dataset.csv --desc_path data/symptom_description.csv --prec_path data/symptom_precaution.csv --save_dir models --tfidf_max_features 20000 --ngram_min 1 --ngram_max 2 --epochs 20 --batch_size 32 --synth_per_row 4
 ```
   
-### 6. Run the interactive CLI (optional)
+### 7. Run the interactive CLI (optional)
 Test the core prediction engine via the command line.
 ```bash
 python src/chatbot.py --models_dir models --interactive --threshold 0.05
 ```
 
-### 7. Run the project
+### 8. Run the project
 Launch the web interface. 
 ```bash
 python app.py
