@@ -69,7 +69,6 @@ GROQ_MODEL_ID=openai/gpt-oss-20b
 LLM_TEMPERATURE=0.2
 LLM_MAX_TOKENS=512
 
-
 ```
 
 
